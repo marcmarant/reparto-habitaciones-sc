@@ -11,7 +11,7 @@ De forma que cualquier colegial pueda acceder tanto al algoritmo que determina l
 
 ### Descarga el ejecutable para Windows:
 <p align="center">
-  <a href="https://github.com/TU_USUARIO/TU_REPO/releases/download/v1.0.0/main.exe" target="_blank">
+  <a href="https://github.com/TU_USUARIO/TU_REPO/releases/download/v1.0.0/reparto_habitaciones_sc.exe" target="_blank">
     <img src="https://img.shields.io/badge/Descargar-main.exe-blue?style=for-the-badge&logo=windows" style="border-radius: 10px; background: #222; padding: 10px;">
   </a>
 </p>
