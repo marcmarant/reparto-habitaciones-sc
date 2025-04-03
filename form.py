@@ -61,30 +61,40 @@ class Formulario(tk.Frame):
         if not nombre or not anyo or not creditos or not habitacion_actual:
             messagebox.showwarning("Advertencia", "Por favor, complete todos los campos obligatorios (*).")
             return
-        anyo = int(anyo)
-        if anyo < 1:
-            messagebox.showwarning("Advertencia", f"El año de un colegial indica el número de años que lleva en el colegio y por tanto debe ser mayor a 0.")
-            return
-        creditos = float(creditos)
-        if creditos < MIN_CREDITOS or creditos > MAX_CREDITOS:
-            messagebox.showwarning("Advertencia", f"Los créditos deben ser un número decimal entre {MIN_CREDITOS} y {MAX_CREDITOS}.")
-            return
-        habitacion_actual = int(habitacion_actual)
-        if habitacion_actual < MIN_HABITACION or habitacion_actual > MAX_HABITACION:
-            messagebox.showwarning("Advertencia", f"La habitación actual debe ser un número entero entre {MIN_HABITACION} y {MAX_HABITACION}.")
-            return
-        if habitaciones_solicitadas:
-            habitaciones_solicitadas = [int(h) for h in habitaciones_solicitadas.split(',')]
-            if any(h < MIN_HABITACION or h > MAX_HABITACION for h in habitaciones_solicitadas):
-                messagebox.showwarning("Advertencia", f"Todas las habitaciones solicitadas deben ser números enteros entre {MIN_HABITACION} y {MAX_HABITACION}.")
+        try:
+            anyo = int(anyo)
+            if anyo < 1:
+                messagebox.showwarning("Advertencia", f"El año de un colegial indica el número de años que lleva en el colegio y por tanto debe ser mayor a 0.")
                 return
-            if len(habitaciones_solicitadas) != len(set(habitaciones_solicitadas)):
-                messagebox.showwarning("Advertencia", "Se ha introducido más de una vez la misma habitación.")
+            creditos = float(creditos)
+            if creditos < MIN_CREDITOS or creditos > MAX_CREDITOS:
+                messagebox.showwarning("Advertencia", f"Los créditos deben ser un número decimal entre {MIN_CREDITOS} y {MAX_CREDITOS}.")
                 return
-            if habitacion_actual in habitaciones_solicitadas:
-                messagebox.showwarning("Advertencia", "La habitación actual no puede estar en la lista de habitaciones solicitadas.")
+            habitacion_actual = int(habitacion_actual)
+            if habitacion_actual < MIN_HABITACION or habitacion_actual > MAX_HABITACION:
+                messagebox.showwarning("Advertencia", f"La habitación actual debe ser un número entero entre {MIN_HABITACION} y {MAX_HABITACION}.")
                 return
-        else: habitaciones_solicitadas = [] # Si no se han introducido habitaciones solicitadas se interpreta que no se pde cambio y se asigna una lista vacía
+            if habitaciones_solicitadas:
+                habitaciones_solicitadas = [int(h) for h in habitaciones_solicitadas.split(',')]
+                if any(h < MIN_HABITACION or h > MAX_HABITACION for h in habitaciones_solicitadas):
+                    messagebox.showwarning("Advertencia", f"Todas las habitaciones solicitadas deben ser números enteros entre {MIN_HABITACION} y {MAX_HABITACION}.")
+                    return
+                if len(habitaciones_solicitadas) != len(set(habitaciones_solicitadas)):
+                    messagebox.showwarning("Advertencia", "Se ha introducido más de una vez la misma habitación.")
+                    return
+                if habitacion_actual in habitaciones_solicitadas:
+                    messagebox.showwarning("Advertencia", "La habitación actual no puede estar en la lista de habitaciones solicitadas.")
+                    return
+            else: habitaciones_solicitadas = [] # Si no se han introducido habitaciones solicitadas se interpreta que no se pde cambio y se asigna una lista vacía
+            # Verificar si la habitación actual ya está ocupada
+            for colegial in self.app.lista_datos:
+                _, _, _, habitacion_ocupada, _ = colegial.split(' - ')
+                if int(habitacion_ocupada) == habitacion_actual:
+                    messagebox.showwarning("Advertencia", "La habitación actual ya está ocupada.")
+                    return
+        except ValueError:
+            messagebox.showwarning("Advertencia", "Por favor, introduzca valores válidos.")
+            return
         # Creación de entrada de la lista
         data = f"{nombre} - {anyo} - {creditos} - {habitacion_actual} - {habitaciones_solicitadas}"
         if self.edit_index is None:

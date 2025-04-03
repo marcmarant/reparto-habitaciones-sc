@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import json
+import sys
 import os
 from form import Formulario
 from assign_rooms import generate_rooms_data  # Importar la función assign_rooms
@@ -80,8 +81,12 @@ class Application(tk.Frame):
 
     def save_data(self):
         """Guardar los datos en un archivo JSON."""
-        with open(DATA_FILE, 'w') as f:
-            json.dump(self.lista_datos, f)
+        try:
+            with open(DATA_FILE, 'w', encoding="utf-8") as f:
+                json.dump(self.lista_datos, f)
+            print("✅ Datos guardados correctamente")
+        except Exception as e:
+            print(f"❌ Error al guardar data.json: {e}")
 
     def load_data(self):
         """Cargar los datos desde un archivo JSON."""
@@ -106,7 +111,6 @@ class Application(tk.Frame):
         new_window = tk.Toplevel(self.master)
         new_window.title("Habitaciones Asignadas")
         new_window.geometry("400x300")
-        new_window.iconbitmap("icon.ico")
 
         text = tk.Text(new_window, wrap=tk.WORD)
         text.pack(expand=True, fill=tk.BOTH)

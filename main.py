@@ -8,8 +8,16 @@ def main():
     # Establecer el título de la ventana principal
     root.title("Asignador de habitaciones SC")
 
-    # Establecer el icono de la ventana principal
-    root.iconbitmap("icon.ico")
+    # Determinar la ruta del icono
+    if getattr(sys, 'frozen', False):  # Si se está ejecutando como un .exe con PyInstaller
+        base_path = sys._MEIPASS  # Carpeta temporal donde PyInstaller extrae archivos
+    else:
+        base_path = os.path.dirname(__file__)  # Carpeta normal en ejecución desde Python
+    icon_path = os.path.join(base_path, "icon.ico")
+
+    # Asignar el icono a la ventana principal
+    if os.path.exists(icon_path):
+        root.iconbitmap(icon_path)
     
     # Establecer el tamaño inicial de la ventana
     root.geometry("700x350")
