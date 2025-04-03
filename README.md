@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/marcmarant/reparto-habitaciones-sc/raw/main/icon.ico" alt="Logo del Colegio Mayor Santa Cruz" width="100"/>
+  <img src="https://github.com/marcmarant/reparto-habitaciones-sc/raw/master/icon.ico" alt="Logo del Colegio Mayor Santa Cruz" width="100"/>
 </div>
 
 # Programa de Asignación de Habitaciones para el *Colegio Mayor de Santa Cruz*
