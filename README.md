@@ -16,7 +16,7 @@ De forma que cualquier colegial pueda acceder tanto al algoritmo que determina l
   </a>
 </p>
 
-Para ejecutar el programa en python clona el repo y ejecuta:
+Si prefieres ejecutar el programa en python clona el repo y ejecuta:
 ```bash
 python main.py
 ```
