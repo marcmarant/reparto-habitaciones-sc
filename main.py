@@ -1,4 +1,6 @@
 import tkinter as tk
+import os
+import sys
 from view import Application
 
 def main():
