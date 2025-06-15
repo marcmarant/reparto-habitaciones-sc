@@ -1,3 +1,4 @@
+import random
 from constants import MAX_HABITACION, MIN_HABITACION
 
 def generate_rooms_data(lista_datos):
@@ -30,19 +31,29 @@ def generate_rooms_data(lista_datos):
             asignaciones[colegial['id']] = colegial['habitacion_actual']
             habitaciones_disponibles.remove(colegial['habitacion_actual'])
 
-    # Se establece el orden de preferencia de los colegiales segun sus creditos y su numero de años en el colegio
+    # Se establece el orden de preferencia de los colegiales para asignar las habitaciones
+    # - Primero se ordena segun el número de creditos obtenidos
+    # - Segundo se ordena por número de años en el colegio
+    # - Tercero se ordena de forma aleatoria en caso de empate en los dos anteriores criterios
+    # colegiales.sort(key=lambda x: (x['creditos'], x['anyo'], random.random()), reverse=True)
     colegiales.sort(key=lambda x: (x['creditos'], x['anyo']), reverse=True)
 
     # Se asignan las habitaciones segun el orden de preferencia de las habitacion para cada colegial
-    for colegial in colegiales:
-        for preferencia in colegial['preferencias']:
-            if preferencia in habitaciones_disponibles:
-                if colegial['id'] in asignaciones:
-                    habitaciones_disponibles.add(asignaciones[colegial['id']])  # Liberar la habitación actual
-                asignaciones[colegial['id']] = preferencia
-                habitaciones_disponibles.remove(preferencia)
-                break
-        if colegial['id'] not in asignaciones:
-            asignaciones[colegial['id']] = habitaciones_disponibles.pop()
+    cambios = True
+    while cambios: # Mientras haya cambios en las asignaciones, se sigue iterando
+        cambios = False
+        for colegial in colegiales:
+            for preferencia in colegial['preferencias']:
+                if preferencia in habitaciones_disponibles:
+                    if colegial['id'] in asignaciones:
+                        # Liberar la habitación actual si ya tiene una asignada
+                        habitaciones_disponibles.add(asignaciones[colegial['id']])
+                    # Asignar la nueva preferencia
+                    asignaciones[colegial['id']] = preferencia
+                    habitaciones_disponibles.remove(preferencia)
+                    cambios = True
+                    break
+            if colegial['id'] not in asignaciones:
+                asignaciones[colegial['id']] = habitaciones_disponibles.pop()
 
     return asignaciones
