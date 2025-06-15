@@ -97,9 +97,11 @@ class Application(tk.Frame):
                     self.lista_box.insert(tk.END, data)
 
     def clear_list(self):
-        """Limpiar todos los datos de la lista."""
-        self.lista_datos.clear()
-        self.lista_box.delete(0, tk.END)
+        """Limpiar todos los datos de la lista con confirmación."""
+        confirm = messagebox.askyesno("Confirmación", "¿Estás seguro de que quieres borrar todos los datos de la lista?")
+        if confirm:
+            self.lista_datos.clear()
+            self.lista_box.delete(0, tk.END)
 
     def generate_assignments(self):
         """Llamar a la función assign_rooms para generar asignaciones y mostrar en una nueva ventana."""
