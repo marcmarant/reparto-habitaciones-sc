@@ -87,12 +87,13 @@ class Formulario(tk.Frame):
                     return
             else: habitaciones_solicitadas = [] # Si no se han introducido habitaciones solicitadas se interpreta que no se pde cambio y se asigna una lista vacía
             # Verificar si la habitación actual ya está ocupada
-            for colegial in self.app.lista_datos:
+            for index, colegial in enumerate(self.app.lista_datos):
                 _, _, _, habitacion_ocupada, _ = colegial.split(' - ')
-                if int(habitacion_ocupada) == habitacion_actual:
+                if int(habitacion_ocupada) == habitacion_actual and index != self.edit_index:
                     messagebox.showwarning("Advertencia", "La habitación actual ya está ocupada.")
                     return
-        except ValueError:
+        except ValueError as e:
+            print(f"Error: {e}")
             messagebox.showwarning("Advertencia", "Por favor, introduzca valores válidos.")
             return
         # Creación de entrada de la lista
