@@ -44,11 +44,14 @@ def generate_rooms_data(lista_datos):
         cambios = False
         for colegial in colegiales:
             for preferencia in colegial['preferencias']:
+                # Si ya se le ha asignado su preferencia se salta
+                if colegial['id'] in asignaciones and preferencia == asignaciones[colegial['id']]:
+                    break
+                # Si la preferencia está disponible, se asigna
                 if preferencia in habitaciones_disponibles:
                     if colegial['id'] in asignaciones:
                         # Liberar la habitación actual si ya tiene una asignada
                         habitaciones_disponibles.add(asignaciones[colegial['id']])
-                    # Asignar la nueva preferencia
                     asignaciones[colegial['id']] = preferencia
                     habitaciones_disponibles.remove(preferencia)
                     cambios = True
