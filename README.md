@@ -42,6 +42,6 @@ El algoritmo de reparto de habitaciones funciona de la siguiente manera:
 4. Al intentar asignar una habitación a varios colegiales esta será asignada al colegial que:
     - Haya obtenido más creditos durante el actual curso académico contando hasta un **máximo de 60 creditos**.
     - En caso de empate a creditos la habitación será asignada por veterania al colegial que lleve más años en el colegio.
-    - En caso de un nuevo empate se asignará la habitación de forma trivial por orden alfabético.
+    - En caso de un nuevo empate se asignará la habitación de forma trivial.
 
 5. Si un que colegial ha solicitado habitaciones no obtiene el cambio a ninguna de ellas se mantendrá en la misma habitación.
