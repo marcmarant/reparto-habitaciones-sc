@@ -35,8 +35,7 @@ def generate_rooms_data(lista_datos):
     # - Primero se ordena segun el número de creditos obtenidos
     # - Segundo se ordena por número de años en el colegio
     # - Tercero se ordena de forma aleatoria en caso de empate en los dos anteriores criterios
-    # colegiales.sort(key=lambda x: (x['creditos'], x['anyo'], random.random()), reverse=True)
-    colegiales.sort(key=lambda x: (x['creditos'], x['anyo']), reverse=True)
+    colegiales.sort(key=lambda x: (x['creditos'], x['anyo'], random.random()), reverse=True)
 
     # Se asignan las habitaciones segun el orden de preferencia de las habitacion para cada colegial
     cambios = True
@@ -58,5 +57,8 @@ def generate_rooms_data(lista_datos):
                     break
             if colegial['id'] not in asignaciones:
                 asignaciones[colegial['id']] = habitaciones_disponibles.pop()
+
+    # Se ordenan las asignaciones por habitación
+    asignaciones = dict(sorted(asignaciones.items(), key=lambda item: item[1]))
 
     return asignaciones

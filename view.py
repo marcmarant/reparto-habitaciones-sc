@@ -118,6 +118,6 @@ class Application(tk.Frame):
         text.pack(expand=True, fill=tk.BOTH)
 
         for id, habitacion in asignaciones.items():
-            text.insert(tk.END, f"{id}: Habitación {habitacion}\n")
+            text.insert(tk.END, f"Habitación {habitacion}: {id}\n")
 
         text.config(state=tk.DISABLED)
