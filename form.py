@@ -64,7 +64,7 @@ class Formulario(tk.Frame):
         try:
             anyo = int(anyo)
             if anyo < 1:
-                messagebox.showwarning("Advertencia", f"El año de un colegial indica el número de años que lleva en el colegio y por tanto debe ser mayor a 0.")
+                messagebox.showwarning("Advertencia", "El año de un colegial indica el número de años que lleva en el colegio y por tanto debe ser mayor a 0.")
                 return
             creditos = float(creditos)
             if creditos < MIN_CREDITOS or creditos > MAX_CREDITOS:

@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
 import json
-import sys
 import os
 from form import Formulario
 from assign_rooms import generate_rooms_data  # Importar la función assign_rooms
