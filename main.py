@@ -22,7 +22,7 @@ def main():
         root.iconbitmap(icon_path)
     
     # Establecer el tamaño inicial de la ventana
-    root.geometry("700x350")
+    root.geometry("1000x500")
     root.resizable(False, False)
     
     # Instanciar la clase Application que contiene la interfaz
