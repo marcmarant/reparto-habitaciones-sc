@@ -34,7 +34,6 @@ def main():
     # Iniciar el bucle principal de la aplicación
     app.mainloop()
 
-
 if __name__ == "__main__":
     # Ejecutar el programa llamando a la función main
     main()
